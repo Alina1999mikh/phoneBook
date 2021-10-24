@@ -1,0 +1,27 @@
+##############################
+## Java
+##############################
+.mtj.tmp/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+
+##############################
+## IntelliJ
+##############################
+out/
+resources/
+.idea/
+.idea_modules/
+*.iml
+*.ipr
+*.iws
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
