@@ -19,6 +19,7 @@ resources/
 *.iml
 *.ipr
 *.iws
+*.fxml
 
 # Ignore Gradle project-specific cache directory
 .gradle
