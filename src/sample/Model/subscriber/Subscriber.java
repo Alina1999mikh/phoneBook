@@ -4,41 +4,41 @@ import lombok.Data;
 import sample.exeption.DataException;
 
 import java.math.BigInteger;
-import java.util.Objects;
 
 @Data
 public class Subscriber implements Comparable<Subscriber> {
+    // private String uuid;
     private NameType name;
     private PhoneType phone;
 
     public Subscriber(NameType name, PhoneType phone) {
         this.name = name;
         this.phone = phone;
+        //    setUuid();
     }
 
-    Subscriber(String name, String phone) throws DataException {
-        this.name = new NameType(name, name);
-        this.phone = new PhoneType(BigInteger.valueOf(Long.parseLong(phone)));
+    public Subscriber(String name, String phone) throws DataException {
+        this(new NameType(name, name), new PhoneType(BigInteger.valueOf(Long.parseLong(phone))));
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Subscriber that = (Subscriber) o;
-        return Objects.equals(name, that.name) && Objects.equals(phone, that.phone);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, phone);
-    }
+//    private void setUuid(){
+//        this.uuid=UUID.randomUUID().toString();
+//        Objects.requireNonNull(uuid, "uuid must not be null");
+//
+//    }
 
     @Override
     public int compareTo(Subscriber o) {
-        if (this.getName().compareTo(o.getName()) > 0) return 1;
-        else if (this.getName().compareTo(o.getName()) < 0) return -1;
-        else {
+        System.out.println("__________________");
+
+        if (this.getName().compareTo(o.getName()) > 0) {
+            System.out.println(this.getName() + " > " + o.getName());
+            return 1;
+        } else if (this.getName().compareTo(o.getName()) < 0) {
+            System.out.println(this.getName() + " < " + o.getName());
+            return -1;
+        } else {
+            System.out.println(this.getName() + " = " + o.getName());
             return this.phone.compareTo(o.phone);
         }
     }

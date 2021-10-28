@@ -8,19 +8,26 @@ import java.util.regex.Pattern;
 
 @Data
 public class NameType extends AbstractType implements Comparable<NameType> {
-    private static final String regexName = ("^([a-zA-Z]{2,}\\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\\s?([a-zA-Z]{1,})?)");
+    private static final String regexName = ("[a-zA-Z]+");
     private String firstName;
     private String secondName;
 
     public NameType(String firstName, String secondName) throws DataException {
         this.firstName = firstName;
         this.secondName = secondName;
-        if (!isCorrect(firstName) || !isCorrect(secondName)) throw new DataException();
+
+        if (!isCorrect(firstName) || !isCorrect(secondName)) {
+            if ((firstName == null) == (secondName == null)) throw new DataException();
+        }
     }
 
     @Override
     boolean isCorrect(String str) {
-        return Pattern.compile(NameType.regexName).matcher(str).matches();
+        try {
+            return Pattern.compile(NameType.regexName).matcher(str).matches();
+        } catch (NullPointerException e) {
+            return false;
+        }
     }
 
     @Override
@@ -47,6 +54,10 @@ public class NameType extends AbstractType implements Comparable<NameType> {
 
     @Override
     public String toString() {
-        return firstName + " " + secondName + '\'';
+        return firstName + " " + secondName;
+    }
+
+    public String getFullName() {
+        return getFirstName() + " " + getSecondName();
     }
 }

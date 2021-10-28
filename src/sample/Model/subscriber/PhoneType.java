@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import sample.exeption.DataException;
 
 import java.math.BigInteger;
+import java.util.Objects;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -30,5 +31,26 @@ public class PhoneType extends AbstractType implements Comparable<PhoneType> {
     @Override
     public String toString() {
         return phone.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PhoneType phoneType = (PhoneType) o;
+        return Objects.equals(phone, phoneType.phone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(phone);
+    }
+
+    public BigInteger getPhone() {
+        return phone;
+    }
+
+    public void setPhone(BigInteger phone) {
+        this.phone = phone;
     }
 }
