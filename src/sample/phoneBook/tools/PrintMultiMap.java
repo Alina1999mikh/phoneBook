@@ -1,4 +1,4 @@
-package sample.entity.tools;
+package sample.phoneBook.tools;
 
 import com.google.common.collect.Multimap;
 

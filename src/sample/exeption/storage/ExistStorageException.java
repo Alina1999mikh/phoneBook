@@ -1,8 +1,10 @@
 package sample.exeption.storage;
 
+import sample.Model.subscriber.Subscriber;
+
 public class ExistStorageException extends StorageException {
 
-    public ExistStorageException(String uuid) {
-        super("\nResume " + uuid + " is  exist", uuid + "\n");
+    public ExistStorageException(Subscriber s) {
+        super("\nSubscriber " + s + " is  exist \n");
     }
 }

@@ -25,17 +25,18 @@ public class SqlHelper {
         return new StorageException(e);
     }
 
-    public void execute(String sql) {
+    public void execute(String sql) throws DataException {
         execute(sql, PreparedStatement::execute);
     }
 
-    public <T> void execute(String sql, SqlTransaction<T> executor) {
+    public <T> T execute(String sql, SqlTransaction<T> executor) throws DataException {
         try (Connection conn = connectionFactory.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            executor.execute(ps);
-        } catch (SQLException | DataException e) {
-            assert e instanceof SQLException;
-            throw existException((SQLException) e);
+            return executor.execute(ps);
+        } catch (SQLException e) {
+            throw existException(e);
+        } catch (DataException e) {
+            throw new DataException();
         }
     }
 }

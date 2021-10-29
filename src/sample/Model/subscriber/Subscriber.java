@@ -18,7 +18,7 @@ public class Subscriber implements Comparable<Subscriber> {
     }
 
     public Subscriber(String name, String phone) throws DataException {
-        this(new NameType(name, name), new PhoneType(BigInteger.valueOf(Long.parseLong(phone))));
+        this(new NameType(name.split(" ")[0], name.split(" ")[1]), new PhoneType(BigInteger.valueOf(Long.parseLong(phone))));
     }
 
 //    private void setUuid(){
@@ -29,16 +29,12 @@ public class Subscriber implements Comparable<Subscriber> {
 
     @Override
     public int compareTo(Subscriber o) {
-        System.out.println("__________________");
 
         if (this.getName().compareTo(o.getName()) > 0) {
-            System.out.println(this.getName() + " > " + o.getName());
             return 1;
         } else if (this.getName().compareTo(o.getName()) < 0) {
-            System.out.println(this.getName() + " < " + o.getName());
             return -1;
         } else {
-            System.out.println(this.getName() + " = " + o.getName());
             return this.phone.compareTo(o.phone);
         }
     }

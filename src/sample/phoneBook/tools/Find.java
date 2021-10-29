@@ -1,11 +1,11 @@
-package sample.entity.tools;
+package sample.phoneBook.tools;
 
 import com.google.common.collect.Multimap;
 import sample.Model.subscriber.AbstractType;
 import sample.Model.subscriber.NameType;
 import sample.Model.subscriber.PhoneType;
 import sample.Model.subscriber.Subscriber;
-import sample.exeption.ActionException;
+import sample.exeption.DataException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,11 +19,11 @@ public class Find {
         this.entity = entity;
     }
 
-    public <T extends AbstractType> Collection<Subscriber> find(T search) throws ActionException {
+    public <T extends AbstractType> Collection<Subscriber> find(T search) throws DataException {
         if (search.getClass().equals(NameType.class)) {
             String fName = ((NameType) search).getFirstName();
             String sName = ((NameType) search).getSecondName();
-            if (fName == null && sName == null) throw new ActionException();
+            if (fName == null && sName == null) throw new DataException();
             else if (fName != null && sName != null) return findByFullName((NameType) search);
         }
 
